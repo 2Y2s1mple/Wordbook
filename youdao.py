@@ -17,6 +17,7 @@ base_dir = os.path.dirname(os.path.abspath(__file__))
 wl = open(os.path.join(base_dir, 'wordlist.txt'), 'r')
 f = open(os.path.join(base_dir, 'output.xml'), 'w')
 f.write('<wordbook>')
+x = 1
 for word in wl:
 	f.write('<item>')
 	query = urlx + word
@@ -24,9 +25,11 @@ for word in wl:
 	reply = json.loads(r.text)	
 	f.write('<word>'+reply['query']+'</word>')
 	f.write('<trans><![CDATA['+' '.join(reply['basic']['explains'])+']]></trans>')
-	f.write('<phonetic><![CDATA[['+reply['basic']['phonetic']+']]]></phonetic>')
+	f.write('<phonetic><![CDATA[['+reply.get('basic').get('phonetic','')+']]]></phonetic>')
 	f.write('<tags>'+group_tag+'</tags><progress>-1</progress>')
-	print(reply['basic'])
+	print(x)
+	x += 1
+	print(r.text)
 	f.write('</item>')
 
 f.write('</wordbook>')
