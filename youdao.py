@@ -14,6 +14,7 @@ group_tag = 'CET-6'
 
 
 base_dir = os.path.dirname(os.path.abspath(__file__))
+wl = open(os.path.join(base_dir, 'wordlist.txt'), 'r')
 f = open(os.path.join(base_dir, 'output.xml'), 'w')
 f.write('<wordbook>')
 for word in wl:
@@ -30,3 +31,4 @@ for word in wl:
 
 f.write('</wordbook>')
 f.close()
+wl.close()
